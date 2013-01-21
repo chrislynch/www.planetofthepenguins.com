@@ -6,7 +6,7 @@
 	        <link rel="icon" type="image/png" href="favicon.ico">
 
         	<!-- Title and SEO information -->
-        	<title></title>
+        	<title><?= $this->content->title ?></title>
 
 	        <meta name="keywords" content="" />
 	        <meta name="description" content="" />
