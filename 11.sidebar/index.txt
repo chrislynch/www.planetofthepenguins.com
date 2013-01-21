@@ -1,0 +1,30 @@
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50e999277381fa2b"></script>
+<!-- AddThis Button END -->
+
+### About Chris Lynch ###
+
+Chris is an award winning writer based in Cardiff, UK.
+
+Chris wrote [The Dark](http://www.thedarkcomicbook.com) for [AAM/Markosia](http://www.markosia.com), and is the 
+co-creator of the seminal UK horror anthology "[Monkeys with Machineguns](http://www.monkeyswithmachineguns.com)".
+
+Chris also edited the Red Cross Charity Anthology [Hammer of Time](http://www.lulu.com/spotlight/mwm).
+
+Chris has written for a number of UK and US publications; including work for Arcana, 2026 Books, Accent UK, Something Wicked, The Sorrow, and Insomnia Publications.
+
+Chris is CTO of [eCommerce Centric](http://www.ecommercecentric.co.uk), who own and run such brands as [Android Tablet store Technology Centric](http://www.technologycentric.co.uk). 
+Chris created the [engine4 PHP Framework](http://www.engine4.net) as part of this work with [UK web development company Gravit-e Centric](http://www.gravit-e.co.uk) (of which he is also CTO)
+and released the code as open source in 2012.
+Chris blogs about technology, the internet, and eBusiness both here and for both eCommerce Centric and Gravit-e Centric. Chris has also been published by Linux.com.
+
+All views and opinions on this website are Chris' own, and not those of his businesses, employers, clients, or publishers.
