@@ -20,11 +20,13 @@
 	        <!-- ROBOTS directives -->	
         	<meta name="robots" content="index,follow" />
         
-	        <!-- Blueprint CSS http://www.blueprintcss.org -->
-        	<link rel="stylesheet" href="_e/lib/blueprint/src/grid.css" type="text/css" media="screen, projection">		
-	        <!--[if lt IE 8]>
-                <link rel="stylesheet" href="_e/lib/blueprint/ie.css" type="text/css" media="screen, projection">
-	        <![endif]-->
+	        
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+                <link rel="stylesheet" href="_e/lib/skeleton/stylesheets/base.css">
+                <link rel="stylesheet" href="_e/lib/skeleton/stylesheets/skeleton.css">
+                <link rel="stylesheet" href="_e/lib/skeleton/stylesheets/layout.css">
 
                 <!-- Font CSS -->
                 <link href='http://fonts.googleapis.com/css?family=Donegal+One' rel='stylesheet' type='text/css'>
@@ -42,18 +44,18 @@
         
 	</head>
 	<body>
-            <div class="container-container">
-                <div id="header-menu">
+            <div class="container sixteen columns">
+                <div id="header-menu" class="sixteen columns alpha omega">
                     <a href="#">HOME</a>
                 </div>
-                <div id="header">
-                    <strong>planet of the penguins: </strong>a blog about <em>writing</em>, <em>technology</em>, and colliding them together on the <em>internet</em>
+                <div id="header" class="sixteen columns alpha omega">
+                    <strong>planet of the penguins: </strong>a blog about <em>writing</em>, <em>comics</em>, <em>technology</em>, and colliding them together on the <em>internet</em>&nbsp;
                 </div>
-		<div class="container">
-                    <div id="content" class="span-16">
+		<div class="sixteen columns">
+                    <div id="content" class="ten columns alpha">
                             <?php print @$this->content->html; ?>
                     </div>
-                    <div id="sidebar" class="span-8 last">
+                    <div id="sidebar" class="six columns omega">
                         <div id="sidebar-contents">
                             <?php print @$this->sidebar->html; ?>
                             
@@ -61,7 +63,7 @@
                             <?php // print theme_sidebar_podcasts(); ?>
                         </div>
                     </div>
-                    <div id="footer" class="span-24 last">
+                    <div id="footer" class="sixteen columns">
                         
                     </div>
 		</div>
