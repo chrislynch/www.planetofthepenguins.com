@@ -62,6 +62,8 @@ function Bubble($text){
         if (trim($textline) == "\n" or trim($textline) == '') {
             $textline = '<br>';
         } else {
+            $textline = BubbleMarkdown($textline);
+            
             switch ($currentline){
                 case 'character':
                     $return .= "<p align='center' style='margin-bottom:0'><strong>$textline</strong></p>";
@@ -86,4 +88,26 @@ function Bubble($text){
     
     return $return;
 }
+
+function BubbleMarkdown($textline){
+    // Formats
+    $formats = array('strong' => '**' , 'em' => '*', 'u' => '_');
+    // Apply bold
+    foreach($formats as $tag=>$marker){
+        $on = FALSE;
+        $markerlen = strlen($marker);
+        
+        $markerpos = strpos($textline,$marker);
+        while (!($markerpos === FALSE)){
+            if(!$on){ $tagonoff = "<$tag>"; $on = TRUE;} else { $tagonoff = "</$tag>"; $on = FALSE; }
+            $textline = substr($textline, 0, $markerpos) . $tagonoff . 
+                        substr($textline, $markerpos + $markerlen);
+            $markerpos = strpos($textline,$marker);
+        }
+        if ($on) { $textline .= "</$tag>"; }
+    }
+    
+    return $textline;
+}
+
 ?>
