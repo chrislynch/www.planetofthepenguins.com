@@ -5,8 +5,8 @@ body{
     font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
     font-size: 11pt;
     color: #444444;
-    background: url("_images/background.jpg"); 
-    background-size: 100%;
+    /* background: url("_images/background.jpg");  */
+    background: #DDD;
     font-weight: 400;
 }
 
@@ -15,8 +15,13 @@ h1, h2 {
     color: darkred;
     font-weight: 500;
     text-transform: uppercase;
-    
 }
+
+h1.invert {
+    background: darkred;
+    color: white;
+}
+
 
 h3, h4, h5 {
     font-family: 'Oswald', sans-serif;
@@ -45,6 +50,10 @@ h3 {
     font-size: 21px;
 }
 
+h3.invert{
+	color: #222222;
+}
+
 h4 {
     font-size: 18px;
 }
@@ -58,6 +67,7 @@ a {
     margin: 0;
     padding: 0;
     vertical-align: baseline;
+    text-decoration: none;
 }
 
 a:hover {
@@ -159,10 +169,8 @@ img, p img {
 }
 
 #sidebar-contents{
-    /*
-    padding-left: 15px;
-    padding-right: 15px;
-    */
+    border-left: 2px dotted black;
+    padding-left: 8px;
 }
 
 #sidebar-contents p {
@@ -176,7 +184,6 @@ img, p img {
 
 #footer {
     padding-top: 12px;
-    margin-top: 4px;
     border-top: 1px solid #000;
     background: #DDD;
     font-size: 9pt;
