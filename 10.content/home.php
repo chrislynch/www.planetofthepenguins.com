@@ -9,16 +9,19 @@ function homepage() {
     
     $blog = array_shift($blogs);
     $return .= '<div class="ten columns head">';
-    $return .= homepage_teaser($blog->content->html,500,'<img>');
+    $teaser .= teaser($blog->content->html,1400,'<img><iframe>');
+    $teaser = str_ireplace('<h1>', '<a href="' . $blog->content->url . '"><h1>', $teaser);
+    $teaser = str_ireplace('</h1>', '</h1></a>', $teaser);
+    $return .= $teaser;
     $return .= " ...<p><strong><a href='{$blog->content->url}'>Read More about '{$blog->content->title}'</a></strong></p>";
     $return .= '</div><hr>';
     
     $i = 2;
     while ($i > 0 && (sizeof($blogs) > 0)){
         $blog = array_shift($blogs);
-        $teaser = homepage_teaser($blog->content->html,300,'<img>');
-        $teaser = str_ireplace('<h1>', '<h2>', $teaser);
-        $teaser = str_ireplace('</h1>', '</h2>', $teaser);
+        $teaser = teaser($blog->content->html,700,'<img>');
+        $teaser = str_ireplace('<h1>', '<a href="' . $blog->content->url . '"><h2>', $teaser);
+        $teaser = str_ireplace('</h1>', '</h2></a>', $teaser);
         $return .= '<div class="ten columns subhead">';
         $return .= $teaser;
         $return .= " ...<p><strong><a href='{$blog->content->url}'>Read More about '{$blog->content->title}'</a></strong></p>";
@@ -26,12 +29,12 @@ function homepage() {
         $i--;
     }
     
-    $i = 10;
+    $i = 100;
     while ($i > 0 && (sizeof($blogs)> 0)){
         $blog = array_shift($blogs);
-        $teaser = homepage_teaser(@$blog->content->html);
-        $teaser = str_ireplace('<h1>', '<h3>', $teaser);
-        $teaser = str_ireplace('</h1>', '</h3>', $teaser);
+        $teaser = teaser(@$blog->content->html);
+        $teaser = str_ireplace('<h1>', '<a href="' . $blog->content->url . '"><h3>', $teaser);
+        $teaser = str_ireplace('</h1>', '</h3></a>', $teaser);
         $return .= '<div class="five columns alpha grid">';
         $return .= $teaser;
         $return .= " ...<p><strong><a href='{$blog->content->url}'>Read More about '{$blog->content->title}'</a></strong></p>";
@@ -40,12 +43,6 @@ function homepage() {
     }
        
     return $return;
-}
-
-function homepage_teaser($content,$characters = 250,$extraallowedtags = '') {
-    $content = strip_tags($content,'<h1>,<p>,</p>,<br>' . $extraallowedtags);
-    $content = substr($content,0,$characters);
-    return $content;
 }
 
 ?>

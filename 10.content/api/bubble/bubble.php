@@ -5,13 +5,21 @@ if (isset($_POST['bubbletext'])){
 }
 
 function Bubble($text){
+    
+    // Set variables
     $return = '';
     $text = explode("\n",$text);
     $currentline = '';
     $currentpage = 1;
     $currentpanel = 1;
+    $currentbubble = 0;
+    $prefix = '';
+    
+    // Pick up parameters
+    $parameters = BubbleConfiguration();
     
     foreach($text as $textline){
+        $prefix = '';
         $textlinechars = str_split($textline);
         // Check for a new page or panel
         if ($textlinechars[0] == '#'){
@@ -27,16 +35,19 @@ function Bubble($text){
                     $panelcount = $currentpanel -1 ;
                     $return = str_ireplace("<p><font size='+1'><strong>PAGE $prevpage</strong></font></p>", 
                                             "<p><font size='+1'><strong>PAGE $prevpage ($panelcount PANELS)</strong></font></p>", $return);
+		    $return = str_ireplace("<p><font size='+1'><strong>PAGE $prevpage (0 PANELS)</strong></font></p>", "<p><font size='+1'><strong>PAGE $prevpage (SPLASH PAGE)</strong></font></p>", $return);
                 }
                 $currentpage++;
                 $currentpanel = 1;
+                $currentbubble = 0;
             } else {
                 // New panel
                 $currentline = 'panel';
                 array_shift($textlinechars);
                 array_shift($textlinechars);
                 $textline = trim(implode($textlinechars));
-                $return .= "<p style='margin-top:8px;'><u>PANEL $currentpanel</u></p>";
+                // $return .= "<p style='margin-top:10px;'><u>PANEL $currentpanel</u></p>";
+                $prefix = "<u>PANEL $currentpanel:</u>&nbsp;";
                 $currentpanel++;
             }
         } else {
@@ -48,33 +59,56 @@ function Bubble($text){
                     array_shift($textlinechars);
                     array_shift($textlinechars);
                     $textline = trim(implode($textlinechars));
-                    $textline = strtoupper($textline);
+                    if($parameters['param_uppercasedialogue'] == 'on'){
+                        $textline = strtoupper($textline);
+                    }
                 } else {
                     // Character
                     $currentline = 'character';
                     array_shift($textlinechars);
                     $textline = trim(implode($textlinechars));
                     $textline = strtoupper($textline);
+                    $currentbubble++;
+                }
+            } else {
+                if ($textlinechars[0] == '.'){
+                    $currentline = 'private';
+                } elseif($textlinechars[0] == '!'){
+                    $currentline = 'comment';
+                    array_shift($textlinechars);
+                    $textline = trim(implode($textlinechars));
+                } else {
+                    $currentline = '';
                 }
             }
         }
         
         if (trim($textline) == "\n" or trim($textline) == '') {
-            $textline = '<br>';
+            if ($prefix !== ''){
+                $return .= "<p style='margin-left:20px'>$prefix$textline</p>";
+            } else {
+                $textline = '<br>';
+            }
         } else {
             $textline = BubbleMarkdown($textline);
             
             switch ($currentline){
                 case 'character':
-                    $return .= "<p align='center' style='margin-bottom:0'><strong>$textline</strong></p>";
+                    $return .= "<p style='margin:0;margin-left:40px;padding-top:5px;'><strong>$textline</strong> ($currentbubble)</p>";
                     break;
                 case 'bubble':
-                    $return .= "<p align='center' style='margin-bottom:0'>$textline</p>";
+                    $return .= "<p style='margin:0;margin-left:80px'>$textline</p>";
+                    break;
+                case 'comment':
+                    $return .= "<p style='background:#DDD;'>$textline</blockquote>";
+                    break;
+                case 'private':
+                    // Do not output a private line
                     break;
                 case 'page':
                 case 'panel':
                 default:
-                    $return .= "<p>$textline</p>";
+                    $return .= "<p style='margin-left:20px'>$prefix$textline</p>";
                     break;
             }
         }
@@ -85,6 +119,23 @@ function Bubble($text){
     $panelcount = $currentpanel -1 ;
     $return = str_ireplace("<p><font size='+1'><strong>PAGE $prevpage</strong></font></p>", 
                             "<br><p><font size='+1'><strong>PAGE $prevpage ($panelcount PANELS)</strong></font></p>", $return);
+    $return = str_ireplace("<p><font size='+1'><strong>PAGE $prevpage (0 PANELS)</strong></font></p>", 
+                            "<p><font size='+1'><strong>PAGE $prevpage (SPLASH PAGE)</strong></font></p>", $return);
+    
+    return $return;
+}
+
+function BubbleConfiguration(){
+    
+    $return = array();
+    
+    $return['param_uppercasedialogue'] = FALSE;
+    
+    foreach($return as $key => $value){
+        if (isset($_POST[$key])){
+            $return[$key] = $_POST[$key];
+        }
+    }
     
     return $return;
 }
