@@ -51,12 +51,13 @@ function homepage() {
         $teaser = $blog->content->html;
         $teaser = str_ireplace('<h1>', '<a href="' . $blog->content->url . '"><h4>', $teaser);
         $teaser = str_ireplace('</h1>', '</h4></a>', $teaser);
+        $teaser = strip_tags($teaser,'<h4><img><a>');
         $return .= '<div class="ten columns subhead">';
         $return .= $teaser;
         $return .= '</div><hr>';
         $i--;
     }
-   
+
     return $return;
 }
 
