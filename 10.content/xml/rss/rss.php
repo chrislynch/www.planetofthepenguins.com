@@ -13,7 +13,7 @@ function xml_rss(&$e){
     $return .= "<link>http://{$e->_domain()}</link>";
     $return .= "<description>{$e->_config->get('Site.Description')}</description>\n";
     
-    $searchpaths = array('10.content/pages','10.content/posts');
+    $searchpaths = array('10.content/pages','10.content/posts','10.content/shares');
     
     foreach($searchpaths as $searchpath){
         $items = $e->_search($searchpath);

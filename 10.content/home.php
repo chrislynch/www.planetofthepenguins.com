@@ -29,7 +29,7 @@ function homepage() {
         $i--;
     }
     
-    $i = 100;
+    $i = 10;
     while ($i > 0 && (sizeof($blogs)> 0)){
         $blog = array_shift($blogs);
         $teaser = teaser(@$blog->content->html);
@@ -41,7 +41,22 @@ function homepage() {
         $return .= '</div>';
         $i--;
     }
-       
+
+    $return .= '<hr>';
+    $return .= '<h2 class="invert">Latest Shares on Google+</h2>';
+    $blogs = e::_search('10.content/shares');
+    $i = 10;
+    while ($i > 0 && (sizeof($blogs) > 0)){
+        $blog = array_shift($blogs);
+        $teaser = $blog->content->html;
+        $teaser = str_ireplace('<h1>', '<a href="' . $blog->content->url . '"><h4>', $teaser);
+        $teaser = str_ireplace('</h1>', '</h4></a>', $teaser);
+        $return .= '<div class="ten columns subhead">';
+        $return .= $teaser;
+        $return .= '</div><hr>';
+        $i--;
+    }
+   
     return $return;
 }
 
