@@ -2,7 +2,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         	<base href="<?= $this->_basehref() ?>">
-
+		<meta name="google-site-verification" content="WLoyjKe5rrt9314tg-t09hxgsWkdwR1jjWZFTVYJfFA" />
 	        <link rel="icon" type="image/png" href="favicon.ico">
 
         	<!-- Title and SEO information -->

@@ -32,7 +32,7 @@ function theme_posts_others(&$e){
 		$blog = array_shift($blogs);
 		if(!($blog->content->url == $e->content->url)){
 			$teaser = teaser(@$blog->content->html);
-			$teaser = str_ireplace('<h1>', '<a href="' . $blog->content->url . '"><h3 class="invert">', $teaser);
+			$teaser = str_ireplace('<h1>', '<a href="' . $blog->content->url . '"><h3>', $teaser);
 			$teaser = str_ireplace('</h1>', '</h3></a>', $teaser);
 			$return .= '<div class="five columns alpha grid">';
 			$return .= $teaser;
