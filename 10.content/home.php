@@ -1,8 +1,41 @@
 <?php
+$this->_loadPlugin('drupal');
 
-$this->content->html = homepage();
-$this->content->title = 'Planet of the Penguins: Writing, Comics, Creativity, Technology, and Where They Meet. By Chris Lynch';
+$this->content->html = '<h1>404. Ballsack</h1>';
+$this->content->title = 'Planet of the Penguins: Writing, Comics, Creativity, Technology, and Where They Meet. By Chris Lynch';            
 
+if(strlen($this->p) > 0){
+        $nodes = $this->_drupal->drupal_load_nodes_byURL($this->p);
+
+        if($nodes === FALSE){
+            $this->content->html = '<h1>404. Ballsack</h1>';
+            $this->content->title = 'Planet of the Penguins: Writing, Comics, Creativity, Technology, and Where They Meet. By Chris Lynch';            
+        } else {
+            if (count($nodes) == 1){
+                // Single node
+                $node = array_shift($nodes);
+                $this->content->title = $node['title'];
+                // print Markdown($node['body_value']);
+                print_r($node);
+            } else {
+                // Multiple nodes
+                foreach($nodes as $node){
+                        print "<a href='{$node['url']}'><h2>{$node['title']}</h2></a>";
+                        if (strlen($node['body_summary']) > 0){
+                                print Markdown($node['body_summary']);
+                        } else {
+                                $node['body_summary'] = Markdown($node['body_value']);
+                                $node['body_summary'] = substr($node['body_summary'],0,strpos($node['body_summary'],'</p>'));
+                                print $node['body_summary'];
+                        }	
+                }
+            }
+        }	
+} else {
+    $this->content->html = homepage();
+    $this->content->title = 'Planet of the Penguins: Writing, Comics, Creativity, Technology, and Where They Meet. By Chris Lynch';            
+}
+	
 function homepage() {
     $return = '';
     $blogs = e::_search('10.content/posts');
