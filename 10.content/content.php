@@ -40,16 +40,30 @@ if(strlen($this->p) > 0){
 	
 function homepage(&$e) {
     $return = '';
+    $blogs = $e->_drupal->drupal_load_nodes('n.sticky = 1');
+       
+    while(sizeof($blogs) > 0){
+    	$blog = array_shift($blogs);
+    	$return .= '<div class="ten columns head">';
+    	$teaser = '';
+    	$teaser .= Markdown(teaser($blog['body_value'],750,'<img><iframe>'));
+    	$teaser = str_ireplace('<h1>', '<a href="' . $blog['url'] . '"><h1>', $teaser);
+    	$teaser = str_ireplace('</h1>', '</h1></a>', $teaser);
+    	$return .= $teaser;
+    	$return .= " ...<p><strong><a href='{$blog['url']}'>Read More about '{$blog['title']}'</a></strong></p>";
+    	$return .= '</div><hr>';
+    }
+    
     $blogs = $e->_drupal->drupal_load_nodes('n.sticky = 0');
        
     while(sizeof($blogs) > 0){
     	$blog = array_shift($blogs);
     	$return .= '<div class="ten columns head">';
     	$teaser = '';
-    	$teaser .= teaser($blog['body_value'],250,'<img><iframe>');
-    	$teaser = str_ireplace('<h1>', '<a href="' . $blog['title'] . '"><h1>', $teaser);
-    	$teaser = str_ireplace('</h1>', '</h1></a>', $teaser);
-    	$return .= Markdown($teaser);
+    	$teaser .= Markdown(teaser($blog['body_value'],500,'<img><iframe>'));
+    	$teaser = str_ireplace('<h1>', '<a href="' . $blog['url'] . '"><h2>', $teaser);
+    	$teaser = str_ireplace('</h1>', '</h2></a>', $teaser);
+    	$return .= $teaser;
     	$return .= " ...<p><strong><a href='{$blog['url']}'>Read More about '{$blog['title']}'</a></strong></p>";
     	$return .= '</div><hr>';
     }
