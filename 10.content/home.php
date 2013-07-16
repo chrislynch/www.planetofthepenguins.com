@@ -15,8 +15,10 @@ if(strlen($this->p) > 0){
                 // Single node
                 $node = array_shift($nodes);
                 $this->content->title = $node['title'];
-                // print Markdown($node['body_value']);
-                print_r($node);
+                $this->content->html = Markdown($node['body_value']);
+                if (isset($_GET['debug'])){
+                	$this->content->html .= "<pre>" . print_r($node,TRUE) . "</pre>";
+                }
             } else {
                 // Multiple nodes
                 foreach($nodes as $node){
@@ -32,23 +34,27 @@ if(strlen($this->p) > 0){
             }
         }	
 } else {
-    $this->content->html = homepage();
+    $this->content->html = homepage($this);
     $this->content->title = 'Planet of the Penguins: Writing, Comics, Creativity, Technology, and Where They Meet. By Chris Lynch';            
 }
 	
-function homepage() {
+function homepage(&$e) {
     $return = '';
-    $blogs = e::_search('10.content/posts');
+    $blogs = $e->_drupal->drupal_load_nodes('n.sticky = 0');
+       
+    while(sizeof($blogs) > 0){
+    	$blog = array_shift($blogs);
+    	$return .= '<div class="ten columns head">';
+    	$teaser = '';
+    	$teaser .= teaser($blog['body_value'],250,'<img><iframe>');
+    	$teaser = str_ireplace('<h1>', '<a href="' . $blog['title'] . '"><h1>', $teaser);
+    	$teaser = str_ireplace('</h1>', '</h1></a>', $teaser);
+    	$return .= Markdown($teaser);
+    	$return .= " ...<p><strong><a href='{$blog['url']}'>Read More about '{$blog['title']}'</a></strong></p>";
+    	$return .= '</div><hr>';
+    }
     
-    $blog = array_shift($blogs);
-    $return .= '<div class="ten columns head">';
-    $teaser .= teaser($blog->content->html,1400,'<img><iframe>');
-    $teaser = str_ireplace('<h1>', '<a href="' . $blog->content->url . '"><h1>', $teaser);
-    $teaser = str_ireplace('</h1>', '</h1></a>', $teaser);
-    $return .= $teaser;
-    $return .= " ...<p><strong><a href='{$blog->content->url}'>Read More about '{$blog->content->title}'</a></strong></p>";
-    $return .= '</div><hr>';
-    
+    /*
     $i = 2;
     while ($i > 0 && (sizeof($blogs) > 0)){
         $blog = array_shift($blogs);
@@ -90,8 +96,9 @@ function homepage() {
         $return .= '</div><hr>';
         $i--;
     }
-
+*/
     return $return;
+    
 }
 
 ?>
