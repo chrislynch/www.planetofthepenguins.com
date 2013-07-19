@@ -163,6 +163,13 @@ img, p img {
 
 #sidebar {
     padding-top: 8px;
+    background-color: #CCCCCC;
+    margin-top: -8px;
+
+}
+
+#sidebar #sidebar_content{
+    padding-left: 4px;
 }
 
 #content_bar {
