@@ -22,6 +22,7 @@ function headline_item($blog){
     $return .= '<a href="' . $blog['url'] . '">';
     $return .= '<h1>' . $blog['title'] . '</h1>';
     $return .= '</a>';
+    $return .= Markdown($blog['body_summary']);
     $return .= '<p>Posted :' . $blog['created'] . '</p>';
     $return .= '</div>';
     $return .= '</div>';
