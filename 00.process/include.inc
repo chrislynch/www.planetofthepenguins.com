@@ -50,25 +50,23 @@ function grid_item($blog){
 
 function item($blog){
     $return = '';
-    $return .= '<div class="item sixteen columns">';
-        $return .= '<div class="fifteen columns image_container">';
-        $return .= '<a href="' . $blog['url'] . '">';
-        if (isset($blog['field_primary_image_filename']) && strlen(trim($blog['field_primary_image_filename'])) > 1){
-            $blog['field_primary_image_filename'] = explode('|',$blog['field_primary_image_filename']);
-            $return .= '<img src="http://www.planetofthepenguins.com/_admin/sites/default/files/' . array_shift($blog['field_primary_image_filename']) .'">';
-        } else {
-            $return .= '<img src="_images/tux-batman.png">';
-        }
-        $return .= '</a>';
-        $return .= '</div>';
-        $return .= '<div class="fifteen columns">';
-        $return .= '<a href="' . $blog['url'] . '">';
-        $return .= '<h1>' . $blog['title'] . '</h1>';
-        $return .= '</a>';
-        $return .= Markdown($blog['body_value']);
-        $return .= '<p>Posted :' . $blog['created'] . '</p>';
-        $return .= '</div>';
-    $return .= '</div>';
+    
+    $return .= '<a href="' . $blog['url'] . '">';
+    if (isset($blog['field_primary_image_filename']) && strlen(trim($blog['field_primary_image_filename'])) > 1){
+        $blog['field_primary_image_filename'] = explode('|',$blog['field_primary_image_filename']);
+        $return .= '<img src="http://www.planetofthepenguins.com/_admin/sites/default/files/' . array_shift($blog['field_primary_image_filename']) .'">';
+    } else {
+        $return .= '<img src="_images/tux-batman.png">';
+    }
+    $return .= '</a>';
+    
+    $return .= '<a href="' . $blog['url'] . '">';
+    $return .= '<h1>' . $blog['title'] . '</h1>';
+    $return .= '</a>';
+    
+    $return .= Markdown($blog['body_value']);
+    $return .= '<p>Posted :' . $blog['created'] . '</p>';
+    
     return $return;
 }
 
