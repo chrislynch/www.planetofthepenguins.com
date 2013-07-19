@@ -50,8 +50,8 @@ function grid_item($blog){
 
 function item($blog){
     $return = '';
-    $return .= '<div class="item ten columns">';
-        $return .= '<div class="ten columns image_container">';
+    $return .= '<div class="item sixteen columns">';
+        $return .= '<div class="fifteen columns image_container">';
         $return .= '<a href="' . $blog['url'] . '">';
         if (isset($blog['field_primary_image_filename']) && strlen(trim($blog['field_primary_image_filename'])) > 1){
             $blog['field_primary_image_filename'] = explode('|',$blog['field_primary_image_filename']);
@@ -61,7 +61,7 @@ function item($blog){
         }
         $return .= '</a>';
         $return .= '</div>';
-        $return .= '<div class="ten columns">';
+        $return .= '<div class="fifteen columns">';
         $return .= '<a href="' . $blog['url'] . '">';
         $return .= '<h1>' . $blog['title'] . '</h1>';
         $return .= '</a>';

@@ -60,7 +60,20 @@
                     <strong><a href="">chris lynch's planet of the penguins</a>: </strong>a blog about <em>writing</em>, <em>comics</em>, <em>technology</em>, and colliding them together on the <em>internet</em>&nbsp;
                 </div>
 		<div id="content" class="sixteen columns">
-                    <?php print @$this->content->html; ?>
+                    <?php 
+                    if (strlen(trim(@$this->sidebar->html)) > 0) {
+                        print '<div class="ten columns alpha">' . @$this->content->html . '</div>' . 
+                                '<div class="six columns omega">' . @$this->sidebar->html . '</div>';
+                    } else {
+                        print @$this->content->html; 
+                    }
+                    ?>
+                </div> 
+                <div id="content_bar" class="sixteen columns">
+                    <?php print @$this->content_bar->html; ?>
+                </div> 
+                <div id="content_footer" class="sixteen columns">
+                    <?php print @$this->content_footer->html; ?>
                 </div> 
                 <div id="footer" class="sixteen columns alpha omega">
                     <div class="five columns">

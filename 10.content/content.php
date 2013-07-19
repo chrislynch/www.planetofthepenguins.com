@@ -28,29 +28,18 @@ if(strlen($this->p) > 0){
             }
         }	
 } else {
-    $this->content->html = homepage($this);
-    $this->content->title = 'Planet of the Penguins: Writing, Comics, Creativity, Technology, and Where They Meet. By Chris Lynch';            
-}
-	
-function homepage(&$e) {
     $return = '';
-    $blogs = $e->_drupal->drupal_load_nodes('',array('limit' => '0,3'));
+    $blogs = $this->_drupal->drupal_load_nodes('',array('limit' => '0,3'));
        
     while(sizeof($blogs) > 0){
     	$blog = array_shift($blogs);
     	$return .= headline_item($blog);
     }
-    
-    $blogs = $e->_drupal->drupal_load_nodes('',array('limit' => '4,12'));
-       
-    while(sizeof($blogs) > 0){
-    	$blog = array_shift($blogs);
-    	$return .= grid_item($blog);
-    }
-    
-    return $return;
-    
+    $this->content->html = $return;
+    $this->content->title = 'Planet of the Penguins: Writing, Comics, Creativity, Technology, and Where They Meet. By Chris Lynch';            
 }
+	
+
 
 
 
