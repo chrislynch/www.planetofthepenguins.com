@@ -62,7 +62,7 @@
 		<div id="content" class="sixteen columns">
                     <?php 
                     if (strlen(trim(@$this->sidebar->html)) > 0) {
-                        print '<div class="ten columns alpha">' . @$this->content->html . '</div>' . 
+                        print '<div class="ten columns alpha">' . $this->content->html . '</div>' . 
                                 '<div class="six columns omega">' . @$this->sidebar->html . '</div>';
                     } else {
                         print @$this->content->html; 
