@@ -17,18 +17,20 @@ h1, h2 {
     text-transform: uppercase;
 }
 
+h3, h4, h5 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    color: darkred;
+    text-transform: uppercase;
+}
+
 h1.invert, h2.invert, h3.invert {
     background: darkred;
     color: white;
 }
 
-
-h3, h4, h5 {
-    font-family: 'Oswald', sans-serif;
-    font-weight: bold;
-    font-weight: 400;
-    color: darkred;
-    text-transform: uppercase;
+h3.invert{
+    color: #222222;
 }
 
 h1, h2, h3, h4, h5 {
@@ -42,16 +44,10 @@ h1 {
 
 h2 {
     font-size: 24px;
-    /* The bottom margin is small. It's designed to be used with gray meta text
-     * below a post title. */
 }
 
 h3 {
     font-size: 21px;
-}
-
-h3.invert{
-	color: #222222;
 }
 
 h4 {
@@ -192,24 +188,34 @@ img, p img {
 
 /* HOMEPAGE */
 
-.grid {
-    height: 320px;
+.grid_item {
+    height: 260px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.grid_item h2 {
+    font-size: 12pt;
+    line-height: 16pt;
+    margin-bottom: 4px;
+    height: 64px;
+}
+
+.grid_item p {
+    font-size: 8pt;
+    line-height: 10pt;
+}
+
+.grid_item .image_container {
+    height: 180px;
     overflow: hidden;
 }
 
-.grid p {
-    font-size: 10pt;
+.grid_item .image_container img {
+    min-height: 180px;
+    width: auto;
 }
 
-.grid h3 {
-    font-size: 14pt;
-}
-
-.subhead {
+.headline_item {
     margin-bottom: 8px;
-}
-.subhead img {
-    max-width: 33%;
-    float: left;
-    margin-right: 8px;
 }
