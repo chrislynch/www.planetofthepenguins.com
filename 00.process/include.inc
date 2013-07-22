@@ -23,7 +23,7 @@ function headline_item($blog){
     $return .= '<h1>' . $blog['title'] . '</h1>';
     $return .= '</a>';
     $return .= Markdown($blog['body_summary']);
-    $return .= '<p>Posted :' . $blog['created'] . '</p>';
+    $return .= '<p>Posted by <a href="https://plus.google.com/116170374068555474888?rel=author">Chris Lynch</a> on ' . date('l jS \of F Y h:i:s A',$blog['created']) . '</p>';
     $return .= '</div>';
     $return .= '</div>';
     return $return;
@@ -43,7 +43,7 @@ function grid_item($blog){
     $return .= '</div>';
     $return .= '<h2>' . $blog['title'] . '</h2>';
     $return .= '</a>';
-    $return .= '<p>Posted :' . $blog['created'] . '</p>';
+    $return .= '<p>Posted by <a href="https://plus.google.com/116170374068555474888?rel=author">Chris Lynch</a> on ' . date('l jS \of F Y h:i:s A',$blog['created']) . '</p>';
     $return .= '</div>';
     return $return;
 }
@@ -65,8 +65,8 @@ function item($blog){
         $return .= '<a href="' . $blog['url'] . '">';
         $return .= '<h1>' . $blog['title'] . '</h1>';
         $return .= '</a>';
+        $return .= '<p><strong>Posted by <a href="https://plus.google.com/116170374068555474888?rel=author">Chris Lynch</a> on ' . date('l jS \of F Y h:i:s A',$blog['created']) . '</strong></p>';
         $return .= Markdown($blog['body_value']);
-        $return .= '<p>Posted :' . $blog['created'] . '</p>';
         $return .= '</div>';
     $return .= '</div>';
     return $return;
