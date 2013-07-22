@@ -23,7 +23,7 @@ function headline_item($blog){
     $return .= '<h1>' . $blog['title'] . '</h1>';
     $return .= '</a>';
     $return .= Markdown($blog['body_summary']);
-    $return .= '<p>Posted :' . $blog['created'] . '</p>';
+    $return .= '<p>Posted by <a href="https://plus.google.com/116170374068555474888?rel=author">Chris Lynch</a> on ' . date('l jS \of F Y h:i:s A',$blog['created']) . '</p>';
     $return .= '</div>';
     $return .= '</div>';
     return $return;
@@ -43,28 +43,34 @@ function grid_item($blog){
     $return .= '</div>';
     $return .= '<h2>' . $blog['title'] . '</h2>';
     $return .= '</a>';
-    $return .= '<p>Posted :' . $blog['created'] . '</p>';
+    $return .= '<p>Posted by <a href="https://plus.google.com/116170374068555474888?rel=author">Chris Lynch</a> on ' . date('l jS \of F Y h:i:s A',$blog['created']) . '</p>';
     $return .= '</div>';
     return $return;
 }
 
 function item($blog){
     $return = '';
-    
-    $return .= '<a href="' . $blog['url'] . '">';
-    if (isset($blog['field_primary_image_filename']) && strlen(trim($blog['field_primary_image_filename'])) > 1){
-        $blog['field_primary_image_filename'] = explode('|',$blog['field_primary_image_filename']);
-        $return .= '<img src="http://www.planetofthepenguins.com/_admin/sites/default/files/' . array_shift($blog['field_primary_image_filename']) .'">';
-    } else {
-        $return .= '<img src="_images/tux-batman.png">';
-    }
-    $return .= '</a>';
-    
-    $return .= '<a href="' . $blog['url'] . '">';
-    $return .= '<h1>' . $blog['title'] . '</h1>';
-    $return .= '</a>';
-    
-    $return .= Markdown($blog['body_value']);
+
+    $return .= '<div class="item sixteen columns">';
+        $return .= '<div class="fifteen columns image_container">';
+        $return .= '<a href="' . $blog['url'] . '">';
+        if (isset($blog['field_primary_image_filename']) && strlen(trim($blog['field_primary_image_filename'])) > 1){
+            $blog['field_primary_image_filename'] = explode('|',$blog['field_primary_image_filename']);
+            $return .= '<img src="http://www.planetofthepenguins.com/_admin/sites/default/files/' . array_shift($blog['field_primary_image_filename']) .'">';
+        } else {
+            $return .= '<img src="_images/tux-batman.png">';
+        }
+        $return .= '</a>';
+        $return .= '</div>';
+        $return .= '<div class="fifteen columns">';
+        $return .= '<a href="' . $blog['url'] . '">';
+        $return .= '<h1>' . $blog['title'] . '</h1>';
+        $return .= '</a>';
+        $return .= '<p><strong>Posted by <a href="https://plus.google.com/116170374068555474888?rel=author">Chris Lynch</a> on ' . date('l jS \of F Y h:i:s A',$blog['created']) . '</strong></p>';
+        $return .= Markdown($blog['body_value']);
+        $return .= '</div>';
+    $return .= '</div>';
+
     $return .= '<hr>';
     
     $return .= '
@@ -82,9 +88,6 @@ function item($blog){
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>';
-    
-    
-    $return .= '<p>Posted :' . $blog['created'] . '</p>';
     
     return $return;
 }
