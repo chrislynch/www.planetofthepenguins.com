@@ -36,7 +36,7 @@
                 <link href='http://fonts.googleapis.com/css?family=Oswald:300,400,700' rel='stylesheet' type='text/css'>
                 
 	        <!-- Template CSS -->
-	        <link rel="stylesheet" href="style.css" type="text/css" media="screen, projection">
+	        <link rel="stylesheet" href="style.css?updated=20130719" type="text/css" media="screen, projection">
         
 	        <!-- JQuery -->
         	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -48,6 +48,7 @@
 	</head>
 	<body>
             <div class="container">
+		<!--
                 <div id="header-menu" class="sixteen columns alpha omega" align="right">
                     <a href="http://www.facebook.com/thefictionalist"><img src="_images/icons/Facebook.png"></a>
                     <a href="https://github.com/chrislynch"><img src="_images/icons/Github.png"></a>
@@ -56,14 +57,15 @@
                     <a href="http://www.youtube.com/user/chrislynch"><img src="_images/icons/Youtube.png"></a>
                     <a href="xml/rss"><img src="_images/icons/RSS.png"></a>
                 </div>
+		-->
                 <div id="header" class="sixteen columns alpha omega">
                     <strong><a href="">chris lynch's planet of the penguins</a>: </strong>a blog about <em>writing</em>, <em>comics</em>, <em>technology</em>, and colliding them together on the <em>internet</em>&nbsp;
                 </div>
 		<div id="content" class="sixteen columns">
                     <?php 
                     if (strlen(trim(@$this->sidebar->html)) > 0) {
-                        print '<div class="ten columns alpha">' . @$this->content->html . '</div>' . 
-                                '<div class="six columns omega">' . @$this->sidebar->html . '</div>';
+                        print '<div class="ten columns alpha">' . $this->content->html . '</div>' . 
+                                '<div id="sidebar" class="six columns omega"><div id="sidebar_content">' . @$this->sidebar->html . '</div></div>';
                     } else {
                         print @$this->content->html; 
                     }

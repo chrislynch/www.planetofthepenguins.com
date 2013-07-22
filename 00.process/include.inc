@@ -50,6 +50,7 @@ function grid_item($blog){
 
 function item($blog){
     $return = '';
+
     $return .= '<div class="item sixteen columns">';
         $return .= '<div class="fifteen columns image_container">';
         $return .= '<a href="' . $blog['url'] . '">';
@@ -69,6 +70,25 @@ function item($blog){
         $return .= Markdown($blog['body_value']);
         $return .= '</div>';
     $return .= '</div>';
+
+    $return .= '<hr>';
+    
+    $return .= '
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = "planetofthepenguins"; // required: replace example with your forum shortname
+
+        /* * * DONT EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+            dsq.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+            (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>';
+    
     return $return;
 }
 
