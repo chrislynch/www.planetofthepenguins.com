@@ -61,7 +61,12 @@
                 <div id="header" class="sixteen columns alpha omega">
                     <strong><a href="">chris lynch's planet of the penguins</a>: </strong>a blog about <em>writing</em>, <em>comics</em>, <em>technology</em>, and colliding them together on the <em>internet</em>&nbsp;
                 </div>
-		<div id="content" class="sixteen columns">
+                <div id="banner" class="sixteen columns">
+                	<?php 
+                	print @$this->banner->html;
+                	?>
+                </div>
+				<div id="content" class="sixteen columns">
                     <?php 
                     if (strlen(trim(@$this->sidebar->html)) > 0) {
                         print '<div class="ten columns alpha">' . $this->content->html . '</div>' . 
