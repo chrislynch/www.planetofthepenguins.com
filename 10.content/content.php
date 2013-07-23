@@ -1,8 +1,5 @@
 <?php
-$this->_loadPlugin('drupal');
-
-$this->content->html = '<h1>404. Ballsack</h1>';
-$this->content->title = 'Planet of the Penguins: Writing, Comics, Creativity, Technology, and Where They Meet. By Chris Lynch';            
+$this->_loadPlugin('drupal');   
 
 if(strlen($this->p) > 0){
         if (@$this->content_page->path == '09.content_page' . $this->qp()){
@@ -11,8 +8,7 @@ if(strlen($this->p) > 0){
             $nodes = $this->_drupal->drupal_load_nodes_byURL($this->p);
 
             if($nodes === FALSE){
-                $this->content->html = '<h1>404. Ballsack</h1>';
-                $this->content->title = 'Planet of the Penguins: Writing, Comics, Creativity, Technology, and Where They Meet. By Chris Lynch';            
+                $this->_goto('',301);           
             } else {
                 if (count($nodes) == 1){
                     // Single node
@@ -22,13 +18,15 @@ if(strlen($this->p) > 0){
                     if (isset($_GET['debug'])){
                             $this->content->html .= "<pre>" . print_r($node,TRUE) . "</pre>";
                     }
-                } else {
+                } elseif(count($nodes) > 1) {
                     // Multiple nodes
                     $this->content->html = '';
                     foreach($nodes as $node){
                             $this->content->html .= grid_item($node);
                     }
-                }
+                } else {
+			$this->_goto('',301);
+		}
             }    
         }
         	
