@@ -14,6 +14,9 @@ function Bubble($text){
     $currentpanel = 1;
     $currentbubble = 0;
     $prefix = '';
+    $foundfirstpage = FALSE;
+    $headingcount = 1;
+    $pagebreakbefore = 'always';
     
     // Pick up parameters
     $parameters = BubbleConfiguration();
@@ -26,18 +29,24 @@ function Bubble($text){
             if ($textlinechars[1] !== '#'){
                 // New page
                 $currentline = 'page';
+		$foundfirstpage = TRUE;
                 array_shift($textlinechars);
                 $textline = trim(implode($textlinechars));
+		if($currentpage == 1){
+			if($headingcount > 1) { $return .= '</div>'; }
+		}
                 $return .= "<p><font size='+1'><strong>PAGE $currentpage</strong></font></p>";
                 // Number the panels in the previous page
                 $prevpage = $currentpage -1;
                 if ($prevpage > 0){
                     $panelcount = $currentpanel -1 ;
+		    if ($prevpage == 1 AND $headingcount == 1) { $pagebreakbefore = 'never'; } else { $pagebreakbefore = 'always'; }
                     $return = str_ireplace("<p><font size='+1'><strong>PAGE $prevpage</strong></font></p>", 
-                                            "<p><font size='+1'><strong>PAGE $prevpage ($panelcount PANELS)</strong></font></p>", $return);
-		    $return = str_ireplace("<p><font size='+1'><strong>PAGE $prevpage (0 PANELS)</strong></font></p>", "<p><font size='+1'><strong>PAGE $prevpage (SPLASH PAGE)</strong></font></p>", $return);
+                                            "<p style='page-break-before:$pagebreakbefore'><font size='+1'><strong>PAGE $prevpage ($panelcount PANELS)</strong></font></p>", $return);
+		    $return = str_ireplace("<p style='page-break-before:$pagebreakbefore'><font size='+1'><strong>PAGE $prevpage (0 PANELS)</strong></font></p>", "<p style='page-break-before:$pagebreakbefore'><font size='+1'><strong>PAGE $prevpage (SPLASH PAGE)</strong></font></p>", $return);
                 }
                 $currentpage++;
+		
                 $currentpanel = 1;
                 $currentbubble = 0;
             } else {
@@ -78,7 +87,11 @@ function Bubble($text){
                     array_shift($textlinechars);
                     $textline = trim(implode($textlinechars));
                 } else {
-                    $currentline = '';
+		    if ($foundfirstpage) {
+	                    $currentline = '';
+		    } else {
+			$currentline = 'heading';
+		    }
                 }
             }
         }
@@ -105,6 +118,11 @@ function Bubble($text){
                 case 'private':
                     // Do not output a private line
                     break;
+		case 'heading':
+		    if($headingcount == 1) { $return .= "<div style='margin-top:50%; text-align:center;'>"; }
+		    $return .= "<h$headingcount style='margin:auto'>" . $textline . "</h$headingcount>";
+		    if($headingcount < 3) { $headingcount++; }
+		    break;
                 case 'page':
                 case 'panel':
                 default:

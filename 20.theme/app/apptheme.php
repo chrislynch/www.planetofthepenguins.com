@@ -66,7 +66,7 @@
     <div class="container" id="BodyContainer">
     <div  class="span-24 last" id="HeaderContainer">
         <div id="Header">
-            Bubble: Plain Text Comic Script Formatting Version 0.5
+            Bubble: Plain Text Comic Script Formatting Version 0.65
             <div id="HeaderUserMenu">
                 <?= $this->_basehref() ?><br>
                 <?php if(isset($_COOKIE['user'])) { print "Logged in as {$_COOKIE['user']}"; } ?>
